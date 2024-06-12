@@ -12,6 +12,7 @@
 
 
 
+
 #From here --------------------------------------------------------------------
 #Load default data from CSV file: a default dataframe of the ekr reference matrics
 
@@ -30,7 +31,9 @@ van_ekr <- function (x, watertype, deelmaatlat) {
                     #if under column watertype, there is no value, then return NA
                     len <- unique(mat %>% select(watertype))
                     if (nrow(len) == 1 && is.na(len)) {
+
                       return(NA)
+                    
                     }      
                     
                     d <- data.frame(v1 = NA, v2 = x, v3 = NA)
@@ -93,7 +96,7 @@ van_ekr <- function (x, watertype, deelmaatlat) {
                            print(mat %>% filter(ekr == x) %>% select(watertype) %>% unique())
 
 
-                          } else {
+                      } else {
 
 
                                 new_mat_dec <- rbind(d, mat %>% filter(maatlat %like% 'dec')) %>% 
@@ -111,18 +114,24 @@ van_ekr <- function (x, watertype, deelmaatlat) {
 
                                          conc_1 <- NA
 
-
                                 } else {
 
                                         df1 <- new_mat_inc[pos_inc + 1, c('ekr', watertype)]
                                         df2 <- new_mat_inc[pos_inc - 1, c('ekr', watertype)]
                                         
+                                        if (is.na(as.numeric(df1[, watertype])) || is.na(as.numeric(df2[, watertype]))) {
+                                               
+                                                conc_1 <- ifelse(as.numeric(is.na(df1[, watertype])), as.numeric(df2[, watertype]), as.numeric(df1[, watertype]))
+
+                                        } else {
+
                                         if (df1[, watertype] < df2[, watertype]) {
                                                 
                                                 onder <- df1
                                                 boven <- df2
                                                 
                                         } else if (df1[, watertype] > df2[, watertype]) {
+
                                                 onder <- df2
                                                 boven <- df1
                                         
@@ -130,30 +139,45 @@ van_ekr <- function (x, watertype, deelmaatlat) {
 
 
                                         conc_1 <- (x - as.numeric(onder[, 'ekr']))/(as.numeric(boven[, 'ekr']) - as.numeric(onder[, 'ekr'])) * (boven[, watertype] - onder[, watertype]) + onder[, watertype]
-
+                                     
+                                     }
 
                                 }
 
 
                                 #value 2
 
-                                df1 <- new_mat_dec[pos_dec + 1, c('ekr', watertype)]
-                                df2 <- new_mat_dec[pos_dec - 1, c('ekr', watertype)]
+                                if (is.na(new_mat_dec[pos_dec + 1, watertype]) && is.na(new_mat_dec[pos_dec - 1, watertype])){
+
+                                        conc_2 <- NA
+
+                                } else {
+
+                                        df1 <- new_mat_dec[pos_dec + 1, c('ekr', watertype)]
+                                        df2 <- new_mat_dec[pos_dec - 1, c('ekr', watertype)]
                                 
-                                if (df1[, watertype] < df2[, watertype]) {
+                                        if (is.na(as.numeric(df1[, watertype])) || is.na(as.numeric(df2[, watertype]))) {
+                                               
+                                                conc_2 <- ifelse(as.numeric(is.na(df1[, watertype])), as.numeric(df2[, watertype]), as.numeric(df1[, watertype]))
+
+                                        } else {
                                         
-                                        onder <- df1
-                                        boven <- df2
+                                        if (df1[, watertype] < df2[, watertype]) {
                                         
-                                } else if (df1[, watertype] > df2[, watertype]) {
-                                        onder <- df2
-                                        boven <- df1
-                                  
+                                                onder <- df1
+                                                boven <- df2
+                                                
+                                        } else if (df1[, watertype] > df2[, watertype]) {
+
+                                                onder <- df2
+                                                boven <- df1
+                                        
+                                        }
+
+                                        conc_2 <- (x - as.numeric(onder[, 'ekr']))/(as.numeric(boven[, 'ekr']) - as.numeric(onder[, 'ekr'])) * (boven[, watertype] - onder[, watertype]) + onder[, watertype]
+                                
+                                     }
                                 }
-
-
-                                conc_2 <- (x - as.numeric(onder[, 'ekr']))/(as.numeric(boven[, 'ekr']) - as.numeric(onder[, 'ekr'])) * (boven[, watertype] - onder[, watertype]) + onder[, watertype]
-
 
                                 return(c(as.numeric(conc_1), as.numeric(conc_2)))
 
