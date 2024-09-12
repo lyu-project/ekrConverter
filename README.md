@@ -12,12 +12,9 @@ The package is not yet released. You can download the package and install it loc
 ```
 install.packages("path_to_you_folder/ekrConverter_0.0.0.9000.tar.gz", repos = NULL, type = "source")
 ```    
-    
 
 #### Install directly from GitHub is not yet available.  
-```
-# devtools::install_github("lyu-project/ekrConverter", ref = "v0.1")  
-```
+
 
 ### Prerequisites
 
@@ -25,7 +22,7 @@ Packages tidyverse and data.table are required to run the functions in this pack
 
 ```
 install.packages(c("tidyverse", "data.table"))
-library(ecoAnalysis)
+library(ekrConverter)
 library(data.table)
 library(tidyverse)
 ```
@@ -42,22 +39,22 @@ lsf.str(package:ekrConverter)
 
 ```
 # convert 10.99 ug/L Chlorophyll-a (water type M10) to EKR
-to_ekr(10.99, "M10", "chlfa")
+  to_ekr(10.99, "M10", "chlfa")
 
 # convert EKR 0.84 Chlorophyll-a (water type M10) to concentration in ug/L
-van_ekr(0.84, "M10", "chlfa")
+  van_ekr(0.84, "M10", "chlfa")
 
 # convert 73% coverage submers plant (water type M14) to EKR
-to_ekr(73, "M14", "submerse")
+  to_ekr(73, "M14", "submerse")
 
 # convert EKR 0.2 coverage submerse (water type M14) to coverage submers plant in %
-van_ekr(1, "M14", "submerse")
+  van_ekr(1, "M14", "submerse")
 
 # convert 73% coverage floating leaf (water type M14) to EKR
-to_ekr(73, "M14", "drijvblad")
+  to_ekr(73, "M14", "drijvblad")
 
 # convert EKR 0.2 coverage floating leaf (water type M14) to coverage floating leaf in %
-van_ekr(0.2, "M6", "drijvblad")
+  van_ekr(0.2, "M6", "drijvblad")
 
 ```
 
