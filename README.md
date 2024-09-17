@@ -74,19 +74,18 @@ remove.packages("ekrConverter")
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](add link later) for details on our code of conduct, and the process for submitting pull requests to us.
+edit later
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](add link later). 
+[SemVer](http://semver.org/) is used for versioning. 
 
 ## Authors
 
 * **Liang Yu** - *Initial work and development* - [lyu-project]
 * **Gerard ter Heerdt** - *Initial work*
 
-
-See also the list of [contributors](add link later) who participated in this project.
+list of [contributors](edit later)
 
 ## License
 
