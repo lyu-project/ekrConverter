@@ -22,9 +22,9 @@ Packages tidyverse and data.table are required to run the functions in this pack
 
 ```
 install.packages(c("tidyverse", "data.table"))
-library(ekrConverter)
 library(data.table)
 library(tidyverse)
+library(ekrConverter)
 ```
 
 ### How to use the functions
@@ -70,15 +70,16 @@ remove.packages("ekrConverter")
 
 ## Built With
 
-* [Rshiny](https://shiny.rstudio.com/) - The web framework used
+* [Rshiny](https://shiny.rstudio.com/)
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](add link later) for details on our code of conduct, and the process for submitting pull requests to us.
+Edit later
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](add link later). 
+[SemVer](http://semver.org/)
+Edit later 
 
 ## Authors
 
@@ -86,7 +87,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 * **Gerard ter Heerdt** - *Initial work*
 
 
-See also the list of [contributors](add link later) who participated in this project.
+
 
 ## License
 
